@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function SetPassword(props) {
+function SetPassword({ set }: { set: (password: string) => void }) {
   const input = useRef(null);
   return (
     <>
@@ -11,12 +11,11 @@ function SetPassword(props) {
         type="password"
         autoFocus
         onKeyPress={(e) => {
-          if (e.key === "Enter") props.set(e.target.value);
+          // @ts-ignore
+          if (e.key === "Enter") set(e.target.value);
         }}
       />
-      <button onClick={() => props.set(input.current.value)}>
-        Iniciar sessió
-      </button>
+      <button onClick={() => set((input.current as any).value)}>Següent</button>
     </>
   );
 }
